@@ -1,0 +1,6 @@
+vendor
+.idea
+.node_modules
+Natural/Cache/*
+!Natural/Cache/.gitkeep
+

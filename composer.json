@@ -1,0 +1,25 @@
+{
+    "name": "natural/framework",
+    "require": {
+        "vlucas/phpdotenv": "^2.5",
+        "philo/laravel-blade": "^3.1",
+        "symfony/routing": "^4.1",
+        "filp/whoops": "^2.3"
+    },
+    "authors": [
+        {
+            "name": "Jim van Eijk",
+            "email": "jim@23g.nl"
+        }
+    ],
+    "autoload": {
+        "files": [
+            "Natural/Helper.php",
+            "Natural/Directives.php"
+        ],
+        "classmap": [
+            "Natural/App",
+            "Natural/Helpers"
+        ]
+    }
+}
