@@ -15,12 +15,10 @@
     ],
     "autoload": {
         "files": [
-            "Natural/Helper.php",
-            "Natural/Directives.php"
+            "Helper.php"
         ],
         "classmap": [
-            "Natural/App",
-            "Natural/Helpers"
+            "App"
         ]
     }
 }
