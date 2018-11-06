@@ -1,6 +1,7 @@
 vendor
 .idea
 .node_modules
+.env
 Natural/Cache/*
 !Natural/Cache/.gitkeep
 
