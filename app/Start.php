@@ -1,5 +1,4 @@
-<?php 
-use Whoops;
+<?php
 use Dotenv\Dotenv;
 
     /**
@@ -19,4 +18,11 @@ use Dotenv\Dotenv;
 
     $dotenv = new Dotenv(BASE_PATH);
     $dotenv->load();
-    
+
+
+    /**
+     * Routing
+     * ---------------------------------------------------
+     */
+    require_once BASE_PATH . 'routes/Route.php';
+

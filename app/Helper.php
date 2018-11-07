@@ -2,8 +2,8 @@
 use Natural\Helpers\BaseHelper as BaseHelper;
 use Natural\App\Views\View;
 
-function dump($data) {
-    return BaseHelper::dump($data);
+function dumper($data) {
+    return BaseHelper::dumper($data);
 }
 
 function dump_exit($data) {

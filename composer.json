@@ -3,7 +3,6 @@
     "require": {
         "vlucas/phpdotenv": "^2.5",
         "philo/laravel-blade": "^3.1",
-        "symfony/routing": "^4.1",
         "filp/whoops": "^2.3",
         "symfony/http-foundation": "^4.1"
     },
@@ -15,10 +14,13 @@
     ],
     "autoload": {
         "files": [
-            "Helper.php"
+            "app/Helper.php"
         ],
         "classmap": [
-            "App"
+            "app"
         ]
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^4.1"
     }
 }

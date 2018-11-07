@@ -1,5 +1,4 @@
 <?php
-use Natural\App\Views\View;
 
 Route::set('/', function (){
     Controller::index();
