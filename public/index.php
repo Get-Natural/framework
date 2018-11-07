@@ -1,10 +1,14 @@
 <?php
-    define('BASE_PATH', __DIR__. '/../');
-    define('STORAGE_PATH', __DIR__. '/../storage/');
-
-    /*
-     * Load Composer packages
+    /**
+     *  Start the Application
+     *  -------------------------------------------------
      */
     require "../vendor/autoload.php";
-    require_once "../App/start.php";
+
+    /**
+     *  Start the Application
+     *  -------------------------------------------------
+     */
+    $app = new App\AppStart;
+    $app->start();
 

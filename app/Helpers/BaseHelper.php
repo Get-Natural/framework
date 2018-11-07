@@ -1,5 +1,5 @@
 <?php
-namespace Natural\Helpers;
+namespace App\Helpers;
 /**
  *  Global helper functions
  */

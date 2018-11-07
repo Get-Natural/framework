@@ -3,27 +3,23 @@
  * Class View
  * @package Natural\App\Views
  */
-namespace Natural\App\Views;
+namespace App\Views;
 
 use Philo\Blade\Blade;
 
 class View
 {
-    public $views = BASE_PATH . 'resources/views';
-    public $cache = BASE_PATH . 'Cache';
-
     private $blade;
 
     public function __construct()
     {
-        $this->blade = new Blade($this->views, $this->cache);
+        $views = BASE_PATH . getenv('VIEW_PATH');
+        $cache = STORAGE_PATH . '/cache';
+        $this->blade = new Blade($views, $cache);
     }
 
-    public static function make($view = null, $data = []) {
-        $views = BASE_PATH . 'resources/views';
-        $cache = STORAGE_PATH . 'cache';
-        $blade = new Blade($views, $cache);
-        echo $blade->view()->make($view, $data)->render();
+    public function make($view = null, $data = []) {
+        echo $this->blade->view()->make($view, $data)->render();
     }
 
     public function directive($directive) {
