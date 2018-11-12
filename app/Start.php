@@ -3,6 +3,7 @@ namespace App;
 
 use Dotenv\Dotenv;
 use Whoops;
+use Symfony\Component\HttpFoundation\Request as Request;
 
 class AppStart {
 
@@ -33,6 +34,11 @@ class AppStart {
          * ---------------------------------------------------
          */
         require_once BASE_PATH . '/routes/Route.php';
+
+        $request = Request::createFromGlobals();
+
+        $route = new \Route();
+        $route->handle($request);
     }
 }
 
