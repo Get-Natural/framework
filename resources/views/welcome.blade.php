@@ -6,7 +6,8 @@
         <h1>Hello world</h1>
         <p>Thank you for using Natural Framework, The best and smallest php static website framework</p>
         <nav>
-            <a href="#">Read Docs</a>
+            <a href="{{ route('about') }}">Read Docs</a>
+            <a href="{{ route('contact') }}">Contact</a>
             <a href="#">Github</a>
             <a href="#">Donate</a>
         </nav>

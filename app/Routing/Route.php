@@ -1,6 +1,7 @@
 <?php
 
 use App\Natural;
+use Symfony\Component\HttpFoundation\Request as Request;
 
 class Route extends Natural {
 
@@ -16,16 +17,22 @@ class Route extends Natural {
 
     public static function post($route, $function, $name = null)
     {
-        self::$postRoutes[$route]['route'] = $route;
-        self::$postRoutes[$route]['function'] = $function;
-        self::$postRoutes[$route]['name'] = $name;
+        $routeArray = [
+            'route' => $route,
+            'function' => $function,
+            'name' => $name,
+        ];
+        self::$postRoutes[] = $routeArray;
     }
 
     public static function get($route, $function, $name = null)
     {
-        self::$getRoutes[$route]['route'] = $route;
-        self::$getRoutes[$route]['function'] = $function;
-        self::$getRoutes[$route]['name'] = $name;
+        $routeArray = [
+            'route' => $route,
+            'function' => $function,
+            'name' => $name,
+        ];
+        self::$getRoutes[] = $routeArray;
     }
 
     public function handle($request)
@@ -45,7 +52,7 @@ class Route extends Natural {
     /**
      * Handle GET request
      *
-     * @param mixed $request
+     * @param mixed $url
      */
     public function getRequest($url)
     {
@@ -61,7 +68,7 @@ class Route extends Natural {
     /**
      * Handle POST request
      *
-     * @param mixed $request
+     * @param mixed $url
      */
     public function postRequest($url)
     {
@@ -72,6 +79,19 @@ class Route extends Natural {
         }
 
         return $this->show404();
+    }
+
+    public static function getRouteByName($name)
+    {
+//        $request = Request::createFromGlobals();
+        $allRoutes = array_merge(self::$getRoutes, self::$postRoutes);
+        foreach ($allRoutes as $route) {
+            if ($route['name'] === $name) {
+                return getenv('SITE_URL') . $route['route'];
+            }
+        }
+
+        throw new InvalidArgumentException('Route ["'.$name.'"] not found');
     }
 
     public function show404() {

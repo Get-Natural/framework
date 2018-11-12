@@ -14,3 +14,7 @@ function view($view, $data = []) {
     $compiler = new View;
     $compiler->make($view, $data);
 }
+
+function route($name) {
+    return Route::getRouteByName($name);
+}
