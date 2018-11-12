@@ -1,8 +1,8 @@
 <?php
 
-Route::set('/', function (){
-    Controller::index();
+Route::get('/', function (){
+    return view('welcome');
 });
- Route::set('/about', function (){
-     Controller::about();
- });
+Route::get('/about', function (){
+ return view('about');
+});
