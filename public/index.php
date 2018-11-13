@@ -9,6 +9,6 @@
      *  Start the Application
      *  -------------------------------------------------
      */
+
     $app = new App\AppStart;
-    $app->start();
 

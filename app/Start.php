@@ -7,38 +7,113 @@ use Symfony\Component\HttpFoundation\Request as Request;
 
 class AppStart {
 
-    public function __call($method, $parameters)
+    /**
+     * @var Request
+     */
+    private $request;
+
+    /**
+     * @var Config
+     */
+    private $config;
+
+    /**
+     * @var array
+     */
+    protected $paths = [];
+
+    /**
+     * AppStart constructor.
+     */
+    public function __construct()
     {
-        define('BASE_PATH', realpath(__DIR__. '/../'));
-        define('STORAGE_PATH', realpath(__DIR__. '/../storage'));
+
         /**
-         * Start Building Application
+         * Load file paths
          * ---------------------------------------------------
-         * Nice up the error screens
          */
-        $whoops = new Whoops\Run;
-        $whoops->pushHandler(new Whoops\Handler\PrettyPageHandler);
-        $whoops->register();
+
+        $this->setupPaths();
 
         /**
          * Start Building Application
          * ---------------------------------------------------
-         * Nice up the error screens
          */
 
         $dotenv = new Dotenv(BASE_PATH);
         $dotenv->load();
 
         /**
+         * Set-up config
+         * ---------------------------------------------------
+         */
+
+        $this->config = new Config();
+        $this->config->loadConfigurationFiles(CONFIG_PATH);
+
+        /**
+         * Start Building Application
+         * ---------------------------------------------------
+         */
+
+        $this->ErrorHandling();
+
+        /**
          * Routing
          * ---------------------------------------------------
          */
+        $this->request = Request::createFromGlobals();
+
+        $this->routeHandling();
+
+
+    }
+
+    /**
+     *
+     */
+    private function ErrorHandling() {
+
+        error_reporting(E_ALL);
+
+        $debug = $this->config->get('app.debug');
+
+        $run = new Whoops\Run;
+        if ($debug) {
+            ini_set('display_errors', 1);
+            $run->pushHandler(new Whoops\Handler\PrettyPageHandler);
+            assert_options(ASSERT_ACTIVE, true);
+        } else {
+            ini_set('display_errors', 0);
+            $run->pushHandler(function($e){
+                $debugging = new Debug();
+                $debugging->outputFriendlyError();
+                $debugging->sendDevEmail();
+            });
+        }
+        $run->register();
+    }
+
+    /**
+     *
+     */
+    private function routeHandling() {
+
+        // Get all routes
         require_once BASE_PATH . '/routes/Route.php';
 
-        $request = Request::createFromGlobals();
-
         $route = new \Route();
-        $route->handle($request);
+        $route->handle($this->request);
+    }
+
+    /**
+     *  Set up base paths
+     */
+    private function setupPaths()
+    {
+        define('BASE_PATH', realpath(__DIR__. '/../'));
+        define('STORAGE_PATH', realpath(BASE_PATH . '/storage'));
+        define('CONFIG_PATH', realpath(BASE_PATH . '/config'));
     }
 }
 

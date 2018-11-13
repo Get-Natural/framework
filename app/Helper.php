@@ -18,3 +18,4 @@ function view($view, $data = []) {
 function route($name) {
     return Route::getRouteByName($name);
 }
+

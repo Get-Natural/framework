@@ -6,7 +6,9 @@
         "vlucas/phpdotenv": "^2.5",
         "philo/laravel-blade": "^3.1",
         "filp/whoops": "^2.3",
-        "symfony/http-foundation": "^4.1"
+        "symfony/http-foundation": "^4.1",
+        "symfony/config": "^4.1",
+        "illuminate/config": "^5.7"
     },
     "authors": [
         {
