@@ -2,20 +2,37 @@
 
 namespace Natural\Routing;
 
-use App\Natural;
+use InvalidArgumentException;
+use Natural\Config\Config;
+use Natural\Natural;
 
 class Route extends Natural {
 
+    /**
+     * @var
+     */
     public $request;
+
+    /**
+     * @var array
+     */
+    public static $getRoutes = [];
+
+    /**
+     * @var array
+     */
+    public static $postRoutes = [];
 
     public function __construct()
     {
         parent::__construct();
     }
 
-    public static $getRoutes = [];
-    public static $postRoutes = [];
-
+    /**
+     * @param $route
+     * @param $function
+     * @param null $name
+     */
     public static function post($route, $function, $name = null)
     {
         $routeArray = [
@@ -26,6 +43,11 @@ class Route extends Natural {
         self::$postRoutes[] = $routeArray;
     }
 
+    /**
+     * @param $route
+     * @param $function
+     * @param null $name
+     */
     public static function get($route, $function, $name = null)
     {
         $routeArray = [
@@ -36,6 +58,9 @@ class Route extends Natural {
         self::$getRoutes[] = $routeArray;
     }
 
+    /**
+     * @param $request
+     */
     public function handle($request)
     {
         $method = $request->getMethod();
@@ -82,9 +107,12 @@ class Route extends Natural {
         return $this->show404();
     }
 
+    /**
+     * @param $name
+     * @return string
+     */
     public static function getRouteByName($name)
     {
-//        $request = Request::createFromGlobals();
         $allRoutes = array_merge(self::$getRoutes, self::$postRoutes);
         foreach ($allRoutes as $route) {
             if ($route['name'] === $name) {
@@ -95,7 +123,15 @@ class Route extends Natural {
         throw new InvalidArgumentException('Route ["'.$name.'"] not found');
     }
 
+    /**
+     *
+     */
     public function show404() {
+
+        if (config('app.debug')) {
+            Throw new InvalidArgumentException('Route not defined');
+        }
+
         header("HTTP/1.0 404 Not Found");
         return view('errors.404');
     }
