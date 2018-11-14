@@ -10,5 +10,5 @@
      *  -------------------------------------------------
      */
 
-    $app = new App\AppStart;
+    $app = new App\Natural\Start;
 

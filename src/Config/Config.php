@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Natural\Config;
 
 use Illuminate\Config\Repository;
 use Symfony\Component\Finder\Finder;

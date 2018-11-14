@@ -1,6 +1,7 @@
 <?php
-use App\Helpers\BaseHelper as BaseHelper;
-use App\Views\View;
+use Natural\Helpers\BaseHelper as BaseHelper;
+use Natural\Views\View;
+
 
 function dumper($data) {
     return BaseHelper::dumper($data);
@@ -16,6 +17,6 @@ function view($view, $data = []) {
 }
 
 function route($name) {
-    return Route::getRouteByName($name);
+    return App\Routing\Route::getRouteByName($name);
 }
 

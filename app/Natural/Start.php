@@ -1,11 +1,13 @@
 <?php
-namespace App;
+namespace App\Natural;
 
 use Dotenv\Dotenv;
 use Whoops;
 use Symfony\Component\HttpFoundation\Request as Request;
+use Natural\Config\Config;
+use Natural\Routing\Route;
 
-class AppStart {
+class Start {
 
     /**
      * @var Request
@@ -102,7 +104,7 @@ class AppStart {
         // Get all routes
         require_once BASE_PATH . '/routes/Route.php';
 
-        $route = new \Route();
+        $route = new Route();
         $route->handle($this->request);
     }
 
@@ -111,7 +113,7 @@ class AppStart {
      */
     private function setupPaths()
     {
-        define('BASE_PATH', realpath(__DIR__. '/../'));
+        define('BASE_PATH', realpath(__DIR__ . '/../../'));
         define('STORAGE_PATH', realpath(BASE_PATH . '/storage'));
         define('CONFIG_PATH', realpath(BASE_PATH . '/config'));
     }

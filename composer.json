@@ -18,12 +18,13 @@
     ],
     "autoload": {
         "files": [
-            "app/Helper.php"
+            "src/Support/Helper.php"
         ],
         "classmap": [
             "app"
         ],
         "psr-4": {
+            "Natural\\": "src/",
             "App\\": "app/"
         }
     },

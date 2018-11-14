@@ -1,7 +1,8 @@
 <?php
 
+namespace Natural\Routing;
+
 use App\Natural;
-use Symfony\Component\HttpFoundation\Request as Request;
 
 class Route extends Natural {
 

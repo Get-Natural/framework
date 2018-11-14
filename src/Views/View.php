@@ -3,7 +3,7 @@
  * Class View
  * @package Natural\App\Views
  */
-namespace App\Views;
+namespace Natural\Views;
 
 use Philo\Blade\Blade;
 
